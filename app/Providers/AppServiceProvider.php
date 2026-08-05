@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register Report Observer untuk auto-create notifications
+        \App\Models\Report::observe(\App\Observers\ReportObserver::class);
     }
 }

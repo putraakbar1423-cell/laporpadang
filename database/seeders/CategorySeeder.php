@@ -2,78 +2,61 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
-     * Seeder untuk kategori laporan pengaduan masyarakat
      */
     public function run(): void
     {
         $categories = [
             [
-                'name' => 'Jalan Rusak',
-                'icon' => 'road-damage.png',
-                'description' => 'Laporan terkait jalan berlubang, jalan retak, atau kerusakan jalan lainnya',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Infrastruktur',
+                'description' => 'Laporan terkait infrastruktur jalan, jembatan, dan bangunan publik',
+                'icon' => 'construction',
             ],
             [
-                'name' => 'Sampah',
-                'icon' => 'trash.png',
-                'description' => 'Laporan terkait sampah menumpuk, TPS penuh, atau masalah persampahan',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Kebersihan',
+                'description' => 'Laporan terkait kebersihan lingkungan dan sampah',
+                'icon' => 'cleaning_services',
+            ],
+            [
+                'name' => 'Lalu Lintas',
+                'description' => 'Laporan terkait kemacetan, rambu lalu lintas, dan kecelakaan',
+                'icon' => 'traffic',
+            ],
+            [
+                'name' => 'Penerangan',
+                'description' => 'Laporan terkait lampu jalan dan penerangan public',
+                'icon' => 'light_mode',
             ],
             [
                 'name' => 'Banjir',
-                'icon' => 'flood.png',
-                'description' => 'Laporan terkait banjir, genangan air, atau drainase tersumbat',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'description' => 'Laporan terkait banjir dan drainase',
+                'icon' => 'water',
             ],
             [
-                'name' => 'Lampu Jalan Mati',
-                'icon' => 'streetlight.png',
-                'description' => 'Laporan terkait lampu jalan mati atau rusak',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Fasilitas Umum Rusak',
-                'icon' => 'facility.png',
-                'description' => 'Laporan terkait fasilitas umum rusak seperti taman, halte, jembatan, dll',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Pohon Tumbang',
-                'icon' => 'tree.png',
-                'description' => 'Laporan terkait pohon tumbang atau ranting berbahaya',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Saluran Air Tersumbat',
-                'icon' => 'drain.png',
-                'description' => 'Laporan terkait saluran air atau got tersumbat',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Fasilitas Umum',
+                'description' => 'Laporan terkait fasilitas umum seperti taman, toilet umum, dll',
+                'icon' => 'place',
             ],
             [
                 'name' => 'Lainnya',
-                'icon' => 'other.png',
-                'description' => 'Laporan pengaduan lainnya yang tidak termasuk kategori di atas',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'description' => 'Kategori lainnya yang tidak termasuk di atas',
+                'icon' => 'more_horiz',
             ],
         ];
 
-        DB::table('categories')->insert($categories);
+        foreach ($categories as $category) {
+            Category::updateOrCreate(
+                ['name' => $category['name']],
+                $category
+            );
+        }
+
+        $this->command->info('✓ Categories seeded successfully!');
     }
 }

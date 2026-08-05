@@ -1,0 +1,63 @@
+=============================================
+  FIX CEPAT: DATA TIDAK VALID
+=============================================
+
+MASALAH:
+Kirim laporan dari Flutter → "Data tidak valid"
+
+PENYEBAB:
+Table categories di database KOSONG!
+Backend validasi kategori harus EXISTS di DB.
+
+SOLUSI (5 DETIK):
+==================================
+
+Double-click file ini:
+  FIX_DATA_TIDAK_VALID.bat
+
+Atau manual:
+  cd d:\latihan_flutter\padang\laporpadang
+  php artisan db:seed --class=CategorySeeder
+
+SELESAI!
+==================================
+
+
+VERIFY:
+-------
+php artisan tinker
+Category::count()
+exit
+
+Output harus: 7
+
+
+TEST ULANG:
+-----------
+1. Buka Flutter app
+2. Buat Laporan
+3. Isi form (pilih kategori: Infrastruktur)
+4. Kirim
+
+Expected: ✓ "Laporan Berhasil Dikirim!"
+
+
+KATEGORI YANG DI-INSERT:
+-------------------------
+1. Infrastruktur
+2. Kebersihan
+3. Lalu Lintas
+4. Penerangan
+5. Banjir
+6. Fasilitas Umum
+7. Lainnya
+
+
+TROUBLESHOOTING LENGKAP:
+-------------------------
+Baca: TROUBLESHOOT_VALIDATION.md
+
+
+=============================================
+JALANKAN SEKARANG: FIX_DATA_TIDAK_VALID.bat
+=============================================
